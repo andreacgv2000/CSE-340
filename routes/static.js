@@ -1,12 +1,9 @@
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const path = require("path")
 
-// Static Routes
-router.use(express.static("public"));
-router.use("/css", express.static("public/css"));
-router.use("/js", express.static("public/js"));
-router.use("/images", express.static("public/images"));
+const router = express.Router()
 
-module.exports = router;
+router.use(express.static(path.join(__dirname, "..", "public")))
 
+module.exports = router
 

@@ -1,33 +1,151 @@
-body {
+/* RESET */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f4f4;
-  color: #222;
+  background-color: #ffffff;
+  color: #111;
+  line-height: 1.6;
 }
 
-header, nav, footer {
-  background-color: #003366;
-  color: white;
-  padding: 1rem;
-}
-
-nav a {
-  color: white;
+a {
+  color: #005ea2;
   text-decoration: none;
-  margin-right: 1rem;
 }
 
-.container {
+a:hover {
+  text-decoration: underline;
+}
+
+/* HEADER */
+.site-header {
   padding: 1rem;
 }
 
-.hero img {
-  max-width: 100%;
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.logo {
+  font-size: 1.6rem;
+}
+
+/* NAV */
+.main-nav {
+  background-color: #1f2937;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.main-nav a {
+  color: #ffffff;
+  padding: 0.75rem;
+  display: block;
+}
+
+/* HERO */
+.hero {
+  padding: 1rem;
+}
+
+.hero-text h2 {
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-name {
+  color: #0284c7;
+}
+
+.features {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  background-color: #0284c7;
+  color: #ffffff;
+  padding: 0.6rem 1rem;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+/* IMAGE */
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+
+/* REVIEWS */
+.reviews {
+  padding: 1rem;
+}
+
+.reviews ul {
+  margin-left: 1rem;
+}
+
+/* UPGRADES */
+.upgrades {
+  padding: 1rem;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.upgrade-grid figure {
+  background-color: #0284c7;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.upgrade-grid img {
+  max-width: 100%;
+  background: white;
+}
+
+.upgrade-grid figcaption a {
+  color: white;
+  font-weight: bold;
+}
+
+/* FOOTER */
+.site-footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* ========================= */
+/* DESKTOP (MEDIA QUERY) */
+/* ========================= */
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 1000px;
-    margin: auto;
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
   }
+
+  .upgrade-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+body {
+  border: 10px solid red;
 }
