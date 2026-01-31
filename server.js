@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "public")))
 // 🔹 Routes
 app.use(staticRoutes)
 
-// Inventory routes
+// Inventory routes 
 app.use("/inv", inventoryRoute)
 
 // 🔹 Home route
