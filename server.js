@@ -2,6 +2,9 @@ const express = require("express")
 const path = require("path")
 const app = express()
 const staticRoutes = require("./routes/static")
+const inventoryRoute = require("./routes/inventoryRoute")
+
+const baseController = require("./controllers/baseController")
 
 // 🔹 View engine
 app.set("view engine", "ejs")
@@ -13,10 +16,11 @@ app.use(express.static(path.join(__dirname, "public")))
 // 🔹 Routes
 app.use(staticRoutes)
 
+// Inventory routes
+app.use("/inv", inventoryRoute)
+
 // 🔹 Home route
-app.get("/", (req, res) => {
-  res.render("index")
-})
+app.get("/", baseController.buildHome)
 
 // 🔹 Server
 const port = process.env.PORT || 8080
