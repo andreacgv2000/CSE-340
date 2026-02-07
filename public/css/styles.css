@@ -208,3 +208,27 @@ nav ul {
 .namePrice {
   margin-top: 0.5rem;
 }
+
+
+
+
+
+
+
+
+.vehicle-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .vehicle-detail {
+    grid-template-columns: 1fr;
+  }
+}
