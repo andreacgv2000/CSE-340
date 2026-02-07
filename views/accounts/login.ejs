@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<main class="login-page">
+  <% if (title) { %>
+    <h1><%= title %></h1>
+  <% } else { %>
+    <h1>Login</h1>
+  <% } %>
+
+  <!-- Mensajes flash (errores o avisos) -->
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+
+  <!-- Formulario de login -->
+  <form action="/account/login" method="POST" class="login-form">
+    <div>
+      <label for="username">Email:</label>
+      <input type="text" name="username" id="username" placeholder="Enter your email" required>
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" placeholder="Enter your password" required>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p>No account? <a href="/account/register">Sign-up</a></p>
+</main>
+
+<%- include('../partials/footer') %>
