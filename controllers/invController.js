@@ -19,16 +19,33 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+
 invCont.buildByInvId = async function (req, res, next) {
-  const inv_id = req.params.invId
-  const data = await invModel.getInventoryByInvId(inv_id)
-  let nav = await utilities.getNav()
-  const vehicle = data[0]
-  res.render("./inventory/detail", {
-    title: vehicle.inv_make + " " + vehicle.inv_model,
-    nav,
-    vehicle,
-  })
+  try {
+    const inv_id = req.params.invId
+    const vehicle = await invModel.getInventoryByInvId(inv_id)
+
+    if (!vehicle) {
+      return res.status(404).send("Vehículo no encontrado")
+    }
+
+    const nav = await utilities.getNav()
+    const detailHTML = utilities.buildVehicleDetail(vehicle)
+
+    res.render("./inventory/detail", {
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      nav,
+      detailHTML,
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+invCont.triggerError = async function (req, res, next) {
+  throw new Error("Intentional server error")
 }
 
 
