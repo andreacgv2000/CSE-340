@@ -409,3 +409,124 @@ nav ul {
 .register-page p a:hover {
   text-decoration: underline;
 }
+
+
+
+
+
+
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red;
+}
+
+input:required:valid {
+  border: 2px solid green;
+}
+
+.password-requirements {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+
+
+/* ========================================
+   Add Vehicle Page Styles
+   ======================================== */
+.add-vehicle-page {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add-vehicle-page .page-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.add-vehicle-page .form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.add-vehicle-page .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-vehicle-page .form-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.add-vehicle-page .form-group input,
+.add-vehicle-page .form-group textarea,
+.add-vehicle-page .form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.add-vehicle-page .form-group input:focus,
+.add-vehicle-page .form-group textarea:focus,
+.add-vehicle-page .form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.3);
+  outline: none;
+}
+
+.add-vehicle-page .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.add-vehicle-page .btn-submit {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.add-vehicle-page .btn-submit:hover {
+  background-color: #0056b3;
+}
+
+.add-vehicle-page .error-messages {
+  background-color: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  color: #a80000;
+  padding: 12px 15px;
+  border-radius: 6px;
+}
+
+.add-vehicle-page .error-messages h3 {
+  margin: 0 0 10px 0;
+}
+
+.add-vehicle-page .error-messages ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Optional: make select dropdown match inputs */
+.add-vehicle-page select {
+  background-color: white;
+}

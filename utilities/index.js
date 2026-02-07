@@ -87,4 +87,29 @@ Util.handleErrors = fn => {
   }
 }
 
+
+/* **************************************
+ * Build classification select list for add-inventory form
+ * ************************************ */
+Util.buildClassificationList = async function (selectedId = null) {
+  const data = await invModel.getClassifications()
+  let list = '<select name="classification_id" id="classificationList" required>'
+  list += "<option value=''>Choose a Classification</option>"
+
+  data.rows.forEach(row => {
+    list += `<option value="${row.classification_id}" `
+    if (selectedId != null && row.classification_id == selectedId) {
+      list += "selected "
+    }
+    list += `>${row.classification_name}</option>`
+  })
+
+  list += '</select>'
+  return list
+}
+
+
+
+
+
 module.exports = Util

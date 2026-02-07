@@ -1,0 +1,76 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<main class="add-vehicle-page">
+  <section class="form-section">
+    <h1 class="page-title">Add New Vehicle</h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <div class="error-messages">
+        <h3>Please fix the following errors:</h3>
+        <ul>
+          <% errors.forEach(function(error){ %>
+            <li><%= error %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <form action="/inv/add-inventory" method="POST" class="inventory-form">
+      <div class="form-group">
+        <label for="invMake">Make:</label>
+        <input type="text" id="invMake" name="inv_make" value="<%= inv_make %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invModel">Model:</label>
+        <input type="text" id="invModel" name="inv_model" value="<%= inv_model %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invYear">Year:</label>
+        <input type="number" id="invYear" name="inv_year" value="<%= inv_year %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invDescription">Description:</label>
+        <textarea id="invDescription" name="inv_description" required><%= inv_description %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="invPrice">Price ($):</label>
+        <input type="number" step="0.01" id="invPrice" name="inv_price" value="<%= inv_price %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invMiles">Miles:</label>
+        <input type="number" id="invMiles" name="inv_miles" value="<%= inv_miles %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="invColor">Color:</label>
+        <input type="text" id="invColor" name="inv_color" value="<%= inv_color %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="classificationList">Classification:</label>
+        <%- classificationList %>
+      </div>
+
+      <div class="form-group">
+        <label for="invImage">Image Path:</label>
+        <input type="text" id="invImage" name="inv_image" value="<%= inv_image %>">
+      </div>
+
+      <div class="form-group">
+        <label for="invThumbnail">Thumbnail Path:</label>
+        <input type="text" id="invThumbnail" name="inv_thumbnail" value="<%= inv_thumbnail %>">
+      </div>
+
+      <button type="submit" class="btn-submit">Add Vehicle</button>
+    </form>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

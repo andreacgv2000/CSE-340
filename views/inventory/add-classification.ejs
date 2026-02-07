@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<main class="add-classification">
+  <h1>Add New Classification</h1>
+
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
+
+  <% if (errors) { %>
+    <ul class="notice">
+      <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/inv/add-classification" method="POST" class="classification-form">
+    <div>
+      <label for="classification_name">Classification Name:</label>
+      <input type="text" name="classification_name" id="classification_name"
+             placeholder="Enter classification name" required
+             pattern="^[A-Za-z0-9]+$"
+             title="No spaces or special characters allowed">
+    </div>
+    <button type="submit">Add Classification</button>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>
