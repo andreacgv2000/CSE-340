@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const { get } = require("../routes/static")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -136,7 +137,91 @@ async function addInventory(req, res) {
   }
 }
 
+// Build Inventory Management view
+async function buildManagementView(req, res, next) {
+  try {
+    let nav = await utilities.getNav()
 
+
+    // espacio solicitado en la instrucción
+    const classificationSelect = await utilities.buildClassificationList()
+
+    res.render("inventory/management", {
+      title: "Inventory Management",
+      nav,
+      classificationSelect,
+      errors: null
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+invCont.getInventoryJSON = async function(req, res, next) {
+  try {
+    const classification_id = req.params.classification_id
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    res.json(data)
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+
+/* ***************************
+ *  Build edit inventory view
+ * ************************** */
+invCont.editInventoryView = async function (req, res, next) {
+    // Obtener el ID del inventario desde la URL y convertirlo a entero
+    const inv_id = parseInt(req.params.inv_id);
+
+    // Construir la navegación del sitio
+    let nav = await utilities.getNav();
+
+    // Obtener los datos completos del inventario desde el modelo
+    const itemData = await invModel.getInventoryById(inv_id);
+
+    // Construir la lista de clasificaciones con la selección actual
+    const classificationSelect = await utilities.buildClassificationList(itemData.classification_id);
+
+    // Crear variable con el nombre del vehículo para el título
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+
+    // Renderizar la vista "edit-inventory.ejs" y pasar todos los datos necesarios
+    res.render("./inventory/edit-inventory", {
+        title: "Edit " + itemName,
+        nav,
+        classificationSelect: classificationSelect,
+        errors: null, // para errores de validación, si los hubiera
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_description: itemData.inv_description,
+        inv_image: itemData.inv_image,
+        inv_thumbnail: itemData.inv_thumbnail,
+        inv_price: itemData.inv_price,
+        inv_miles: itemData.inv_miles,
+        inv_color: itemData.inv_color,
+        classification_id: itemData.classification_id
+    });
+};
 
 
 /* ***************************
@@ -147,6 +232,10 @@ module.exports = {
   buildAddClassification,
   addClassification,
   buildAddInventory,   // <-- agregar
-  addInventory         // <-- agregar
+  addInventory,         // <-- agregar
+  buildManagementView,
+  inventoryJSON: invCont.getInventoryJSON ,
+  getInventoryJSON: invCont.getInventoryJSON,
+  editInventoryView: invCont.editInventoryView
 }
 

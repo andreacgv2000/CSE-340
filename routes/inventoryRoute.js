@@ -22,18 +22,6 @@ router.get(
 
 
 
-// Management view
-router.get('/', async (req, res, next) => {
-  try {
-    let nav = await utilities.getNav()
-    res.render('inventory/management', {
-      title: 'Inventory Management',
-      nav
-    })
-  } catch (error) {
-    next(error)
-  }
-})
 
 
 
@@ -51,5 +39,18 @@ router.post(
 // Add Inventory
 router.get('/add-inventory', invController.buildAddInventory)
 router.post('/add-inventory', invController.addInventory)
+
+
+// Management view (Inventory Management)
+router.get('/', utilities.handleErrors(invController.buildManagementView))
+
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route to display the Edit Inventory View
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+
 
 module.exports = router;
