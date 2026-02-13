@@ -5,17 +5,11 @@
 <main>
   <h1><%= title %></h1>
 
-  <% if (message) { %>
-    <div class="notice"><%= message %></div>
-  <% } %>
+  <!-- Mensajes flash (errores o avisos) -->
+  <div class="flash-messages">
+    <%- messages() %>
+  </div>
 
-  <% if (errors) { %>
-    <ul>
-      <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
 
   <p>You're logged in ✅</p>
 </main>
