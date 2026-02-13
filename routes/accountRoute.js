@@ -35,7 +35,7 @@ router.post(
 
 
 // GET route para la vista Account (después del login)
-router.get("/", accountsController.buildAccount);
+router.get("/",utilities.checkLogin, utilities.handleErrors(accountsController.buildAccount));
 
 
 // Exportar el router
