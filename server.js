@@ -12,7 +12,7 @@ const accountRoute = require("./routes/accountRoute");
 
 
 const bodyParser = require("body-parser");
-
+const cookieParser = require("cookie-parser")
 // Middleware para leer datos de formularios
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,7 +42,7 @@ app.use(function(req, res, next){
 })
 
 
-
+app.use(cookieParser())
 
 // 🔹 View engine
 app.set("view engine", "ejs")

@@ -22,5 +22,21 @@ router.post(
 );
 
 
+
+
+
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountsController.accountLogin)
+)
+
+
+// GET route para la vista Account (después del login)
+router.get("/", accountsController.buildAccount);
+
+
 // Exportar el router
 module.exports = router;
