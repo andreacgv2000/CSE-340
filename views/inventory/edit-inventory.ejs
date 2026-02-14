@@ -17,7 +17,7 @@
       </div>
     <% } %>
 
-    <form action="/inv/update" method="POST" class="inventory-form">
+    <form id="updateForm" action="/inv/update" method="POST" class="inventory-form">
       <!-- Hidden field to keep track of inventory ID -->
       <input type="hidden" name="inv_id" value="<%= inv_id %>">
 
@@ -73,6 +73,7 @@
 
       <button type="submit" class="btn-submit">Update Vehicle</button>
     </form>
+    <script src="/js/inv-update.js"></script>
   </section>
 </main>
 

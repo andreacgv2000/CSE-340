@@ -53,4 +53,12 @@ router.get(
 );
 
 
+// Route to handle inventory update
+router.post("/update/", 
+  invValidate.newInventoryRules(),  // tus reglas de validación
+  invValidate.checkUpdateData,      // middleware de validación para editar
+  invController.updateInventory
+)
+
+
 module.exports = router;
