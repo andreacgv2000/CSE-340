@@ -112,5 +112,95 @@ validate.checkLoginData = async (req, res, next) => {
   next();
 };
 
+
+
+
+/* **********************************
+ * Update Account Data Validation Rules
+ * ********************************* */
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("First name is required."),
+
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Last name is required."),
+
+    body("account_email")
+      .trim()
+      .notEmpty()
+      .isEmail()
+      .withMessage("A valid email is required.")
+  ]
+}
+
+/* ******************************
+ * Check Update Account Data
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+  let errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/update", {
+      errors,
+      title: "Update Account",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id
+    })
+    return
+  }
+  next()
+}
+
+/* **********************************
+ * Change Password Validation Rules
+ * ********************************* */
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1
+      })
+      .withMessage(
+        "Password must be at least 12 characters and include 1 uppercase, 1 number and 1 special character."
+      )
+  ]
+}
+
+/* ******************************
+ * Check Password Data
+ * ***************************** */
+validate.checkPasswordData = async (req, res, next) => {
+  const { account_id } = req.body
+  let errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/update", {
+      errors,
+      title: "Update Account",
+      nav,
+      account_id
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate;
 
