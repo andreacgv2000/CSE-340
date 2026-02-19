@@ -3,6 +3,7 @@
     <h1 class="logo">CSE Motors</h1>
 
     <% if (locals.loggedin) { %>
+       <a href="/favorites" class="account-link">Favorites</a>
       <a href="/account/" class="account-link">
         Welcome <%= locals.accountData.account_firstname %>
       </a>

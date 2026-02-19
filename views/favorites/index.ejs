@@ -1,0 +1,20 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+<h1>My Favorites</h1>
+
+<% if (favorites.length > 0) { %>
+  <% favorites.forEach(vehicle => { %>
+    <div>
+      <h3><%= vehicle.inv_make %> <%= vehicle.inv_model %></h3>
+
+      <form action="/favorites/remove" method="post">
+        <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+        <button type="submit">Remove</button>
+      </form>
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>You have no favorite vehicles.</p>
+<% } %>
+<%- include('../partials/footer') %>

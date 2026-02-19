@@ -1,6 +1,7 @@
 const invModel = require("../models/inventory-model")
 const { get } = require("../routes/static")
 const utilities = require("../utilities/")
+const favModel = require("../models/favorite-model")
 
 const invCont = {}
 
@@ -21,9 +22,15 @@ invCont.buildByClassificationId = async function (req, res, next) {
 }
 
 
+
+
+
+
+
+
 invCont.buildByInvId = async function (req, res, next) {
   try {
-    const inv_id = req.params.invId
+    const inv_id = parseInt(req.params.invId)
     const vehicle = await invModel.getInventoryByInvId(inv_id)
 
     if (!vehicle) {
@@ -31,7 +38,14 @@ invCont.buildByInvId = async function (req, res, next) {
     }
 
     const nav = await utilities.getNav()
-    const detailHTML = utilities.buildVehicleDetail(vehicle)
+
+    let isFavorite = false
+    if (res.locals.loggedin) {
+      const account_id = res.locals.accountData.account_id
+      isFavorite = await favModel.checkFavorite(account_id, inv_id)
+    }
+
+    const detailHTML = utilities.buildVehicleDetail(vehicle, isFavorite)
 
     res.render("./inventory/detail", {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
@@ -43,6 +57,15 @@ invCont.buildByInvId = async function (req, res, next) {
     next(error)
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 invCont.triggerError = async function (req, res, next) {

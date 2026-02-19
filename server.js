@@ -73,6 +73,14 @@ app.get("/", baseController.buildHome)
 
 app.use("/account", accountRoute);
 
+
+
+
+const favoriteRoute = require("./routes/favoriteRoute")
+app.use("/favorites", favoriteRoute)
+
+
+
 // 🔹 Server
 const port = process.env.PORT || 8080
 app.listen(port, () => {
